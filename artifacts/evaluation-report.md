@@ -41,8 +41,9 @@ mechanical: it cites files, logs, and artifacts, never agent narration.
 Demonstrates that a passing skill still triggers maintenance + optimization.
 
 ## Pull request
-PR URL: see `artifacts/pr-url.txt` (also printed in the final handoff). This
-report is updated with the URL once the PR is opened.
+PR URL: **https://github.com/Lvvphole/SkillOPs/pull/2**
+(also in `artifacts/pr-url.txt` and printed in the final handoff.)
+Commit: `e0298666d9e007d4d2a2a19b19b0f5594cb3f8e2`; push: SUCCESS.
 
 ## Evaluator verdict
 No unresolved correction or escalation remains. Implementation matches the
