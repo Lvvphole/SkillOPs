@@ -5,14 +5,14 @@ skills. You arrange a loop once in a manifest and hit go; the runtime then runs
 the skill, collects evidence, measures performance, compares thresholds, branches
 into corrective repair (on fail) or preventive maintenance + optimization (on
 pass), verifies any proposed change, versions the skill, writes memory, and emits
-artifacts — deterministically, without an open-ended agent.
+artifacts deterministically, without an open-ended agent.
 
 > **Architecture:** the Python package `skillops/` owns the deterministic core
 > (loop runtime, CLI, manifest loading, schema validation, evidence, metrics,
 > thresholds, branching, verification, versioning, memory, artifacts, PR
 > automation, tests). The pre-existing **TypeScript** code under `src/`
 > (Inngest workflows, run/update functions) is **preserved as an adapter /
-> interface layer** — see `artifacts/repo-inspection.md` for the language
+> interface layer** see `artifacts/repo-inspection.md` for the language
 > decision. The legacy TS documentation is retained further down this file.
 
 ## Arrange once, hit go
