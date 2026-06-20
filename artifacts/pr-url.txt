@@ -1,0 +1,15 @@
+PR URL: https://github.com/Lvvphole/SkillOPs/pull/2
+
+Branch:        claude/zealous-hopper-hrc9n6
+Base:          main
+Commit hash:   e0298666d9e007d4d2a2a19b19b0f5594cb3f8e2
+Push result:   SUCCESS (git push -u origin claude/zealous-hopper-hrc9n6)
+Remote head:   e0298666d9e007d4d2a2a19b19b0f5594cb3f8e2
+PR created:    SUCCESS (mcp github create_pull_request)
+Repository:    https://github.com/Lvvphole/SkillOPs
+
+Note: the contract requested the feature branch name
+`feat/manifest-skillops-loop-runtime`. The Claude Code web harness pins this
+session to `claude/zealous-hopper-hrc9n6` and forbids pushing elsewhere, so the
+PR is opened from that branch into `main`. This mapping is documented and
+approved in artifacts/repo-inspection.md.

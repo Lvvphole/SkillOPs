@@ -1,0 +1,19 @@
+# SkillSpec for incident-triage (validates against loops/schemas/skill-spec.schema.json)
+skill_id: incident-triage
+name: Incident Triage
+description: Classify incidents as urgent or standard for escalation routing.
+active_version: v1
+owner: skillops
+inputs:
+  fields:
+    - name: id
+      type: string
+    - name: description
+      type: string
+    - name: severity
+      type: string
+      enum: [low, medium, high]
+    - name: customer_impact
+      type: boolean
+outputs:
+  label: [urgent, standard]

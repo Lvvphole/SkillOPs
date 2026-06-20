@@ -1,0 +1,10 @@
+# Runtime configuration for the incident-triage skill.
+classifier:
+  urgent_when:
+    severity_in: [high]
+    customer_impact: true   # OR'd with severity_in
+action:
+  on_urgent: escalate
+  on_standard: none
+limits:
+  max_duration_ms: 1000

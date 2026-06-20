@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "metric-spec.schema.json",
+  "title": "MetricSpec",
+  "description": "Declares metrics and their threshold directions. Metrics decide pass/fail.",
+  "type": "object",
+  "required": ["metrics"],
+  "properties": {
+    "metrics": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "direction", "threshold_key"],
+        "properties": {
+          "name": {"type": "string"},
+          "direction": {"type": "string", "enum": ["higher_is_better", "lower_is_better"]},
+          "threshold_key": {"type": "string"},
+          "approved_for_optimization": {"type": "boolean"}
+        }
+      }
+    }
+  }
+}

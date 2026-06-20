@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "evidence-spec.schema.json",
+  "title": "EvidenceSpec",
+  "description": "Declares the evidence that must exist before any analysis runs.",
+  "type": "object",
+  "required": ["required_sources"],
+  "properties": {
+    "required_sources": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "min_sample_size": {"type": "integer", "minimum": 1},
+    "sample_inputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "severity", "customer_impact"],
+        "properties": {
+          "id": {"type": "string"},
+          "description": {"type": "string"},
+          "severity": {"type": "string", "enum": ["low", "medium", "high"]},
+          "customer_impact": {"type": "boolean"}
+        }
+      }
+    }
+  }
+}

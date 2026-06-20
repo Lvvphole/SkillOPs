@@ -1,0 +1,6 @@
+# Deterministic pass/fail thresholds (snake_case keys map to skillops.Thresholds).
+# Metrics decide pass/fail; LLM output never does.
+min_success_rate: 0.8
+max_avg_duration_ms: 1000
+max_false_positive_rate: 0.2
+min_action_rate: 0.25

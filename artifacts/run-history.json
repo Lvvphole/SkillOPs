@@ -1,0 +1,74 @@
+[
+  {
+    "id": "incident-triage-inc-001-1055639",
+    "skill_id": "incident-triage",
+    "started_at": "2026-06-20T04:06:24.992Z",
+    "ended_at": "2026-06-20T04:06:24.992Z",
+    "duration_ms": 5,
+    "success": true,
+    "predicted_positive": true,
+    "actual_positive": true,
+    "action_taken": true,
+    "notes": "urgent"
+  },
+  {
+    "id": "incident-triage-inc-002-1055639",
+    "skill_id": "incident-triage",
+    "started_at": "2026-06-20T04:06:24.992Z",
+    "ended_at": "2026-06-20T04:06:24.992Z",
+    "duration_ms": 5,
+    "success": true,
+    "predicted_positive": false,
+    "actual_positive": false,
+    "action_taken": false,
+    "notes": "standard"
+  },
+  {
+    "id": "incident-triage-inc-003-1055639",
+    "skill_id": "incident-triage",
+    "started_at": "2026-06-20T04:06:24.993Z",
+    "ended_at": "2026-06-20T04:06:24.993Z",
+    "duration_ms": 5,
+    "success": true,
+    "predicted_positive": true,
+    "actual_positive": true,
+    "action_taken": true,
+    "notes": "urgent"
+  },
+  {
+    "id": "incident-triage-inc-004-1055640",
+    "skill_id": "incident-triage",
+    "started_at": "2026-06-20T04:06:24.993Z",
+    "ended_at": "2026-06-20T04:06:24.993Z",
+    "duration_ms": 5,
+    "success": true,
+    "predicted_positive": false,
+    "actual_positive": false,
+    "action_taken": false,
+    "notes": "standard"
+  },
+  {
+    "id": "incident-triage-inc-005-1055640",
+    "skill_id": "incident-triage",
+    "started_at": "2026-06-20T04:06:24.993Z",
+    "ended_at": "2026-06-20T04:06:24.993Z",
+    "duration_ms": 5,
+    "success": true,
+    "predicted_positive": true,
+    "actual_positive": true,
+    "action_taken": true,
+    "notes": "urgent"
+  },
+  {
+    "id": "incident-triage-inc-006-1055640",
+    "skill_id": "incident-triage",
+    "started_at": "2026-06-20T04:06:24.993Z",
+    "ended_at": "2026-06-20T04:06:24.993Z",
+    "duration_ms": 5,
+    "success": true,
+    "predicted_positive": false,
+    "actual_positive": false,
+    "action_taken": false,
+    "notes": "standard"
+  }
+]

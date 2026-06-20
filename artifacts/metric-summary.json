@@ -1,1 +1,18 @@
-{"successRate":1,"avgDurationMs":1,"falsePositiveRate":0,"actionRate":1,"passed":true,"failures":[]}
+{
+  "loop_id": "weekly-skill-review",
+  "skill_id": "incident-triage",
+  "branch": "preventive",
+  "metrics": {
+    "success_rate": 1.0,
+    "avg_duration_ms": 5.0,
+    "false_positive_rate": 0.0,
+    "action_rate": 0.5,
+    "passed": true,
+    "failures": [],
+    "sample_size": 6
+  },
+  "threshold_decision": {
+    "passed": true,
+    "failures": []
+  }
+}

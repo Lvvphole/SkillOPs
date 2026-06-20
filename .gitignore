@@ -4,3 +4,11 @@ dist/
 artifacts/test-data/
 
 artifacts/runs.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+build/

@@ -1,0 +1,20 @@
+# How runs are evaluated into the deterministic metrics that decide pass/fail.
+ground_truth:
+  positive_when:
+    severity_in: [high]
+    customer_impact: true   # OR'd with severity_in
+success_definition: predicted_label_matches_ground_truth
+metrics:
+  - name: success_rate
+    direction: higher_is_better
+    threshold_key: min_success_rate
+  - name: avg_duration_ms
+    direction: lower_is_better
+    threshold_key: max_avg_duration_ms
+  - name: false_positive_rate
+    direction: lower_is_better
+    threshold_key: max_false_positive_rate
+    approved_for_optimization: true
+  - name: action_rate
+    direction: higher_is_better
+    threshold_key: min_action_rate
