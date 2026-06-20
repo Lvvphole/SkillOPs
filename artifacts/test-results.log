@@ -1,2 +1,20 @@
-............................................                             [100%]
-44 passed in 0.16s
+## Test Results
+
+Environment:
+- Node: v24.16.0
+- npm: 11.13.0
+- Python: 3.14.3 via `.venv\Scripts\python.exe`
+
+Commands:
+- `npm.cmd test`
+- `$env:TMP = Join-Path (Get-Location) ".venv\tmp"; $env:TEMP = $env:TMP; .venv\Scripts\python.exe -m pytest`
+
+Results:
+- `npm.cmd test`: 4 passed, 0 failed
+- `.venv\Scripts\python.exe -m pytest`: 44 passed, 0 failed
+
+Notes:
+- Plain `python -m pytest` failed before test setup because the sandbox could
+  not scan `C:\Users\Emory Harris\AppData\Local\Temp\pytest-of-Emory Harris`.
+- The passing pytest run used an ignored workspace-local temp directory under
+  `.venv\tmp`.

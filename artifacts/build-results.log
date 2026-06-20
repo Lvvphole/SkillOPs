@@ -1,19 +1,17 @@
 # SkillOps build / validation log
-# Generated: 2026-06-20T04:06:08Z
 
-## Python version
-Python 3.11.15
+Environment:
+- Node: v24.16.0
+- npm: 11.13.0
+- Python: 3.14.3 via `.venv\Scripts\python.exe`
 
-## Manifest schema validation (python -m skillops validate)
-VALID: loops/incident-triage.loop.yaml
-VALID: loops/meta-loop.yaml
-VALID: loops/weekly-skill-review.yaml
+## Node / TypeScript
+- `npm.cmd run build`: PASS
+- `npm.cmd run typecheck`: PASS
 
-## Byte-compile (python -m compileall skillops)
-compileall: OK (all modules compiled)
-
-## Skill manifest schema checks
-VALID: skills/incident-triage/skill.spec.yaml vs loops/schemas/skill-spec.schema.json
-VALID: skills/incident-triage/evidence.yaml vs loops/schemas/evidence-spec.schema.json
-VALID: skills/incident-triage/improvement-policy.yaml vs loops/schemas/improvement-policy.schema.json
-VALID: skills/incident-triage/evaluation.yaml vs loops/schemas/metric-spec.schema.json
+## Python validation
+- `.venv\Scripts\python.exe -m skillops validate`: PASS
+  - VALID: loops\incident-triage.loop.yaml
+  - VALID: loops\meta-loop.yaml
+  - VALID: loops\weekly-skill-review.yaml
+- `.venv\Scripts\python.exe -m compileall skillops`: PASS
