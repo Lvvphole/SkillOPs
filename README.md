@@ -1,8 +1,107 @@
 # SkillOps
 
-SkillOps is a TypeScript control-loop system for building operational skills that can be run, measured, verified, improved, and versioned over time.
+SkillOps is a **Python-first, manifest-driven autonomous loop runtime** for AI
+skills. You arrange a loop once in a manifest and hit go; the runtime then runs
+the skill, collects evidence, measures performance, compares thresholds, branches
+into corrective repair (on fail) or preventive maintenance + optimization (on
+pass), verifies any proposed change, versions the skill, writes memory, and emits
+artifacts — deterministically, without an open-ended agent.
 
-It is not currently a web app, dashboard, API service, database-backed platform, or CLI tool. It is the core runtime structure for managing looped skills with evidence-based updates.
+> **Architecture:** the Python package `skillops/` owns the deterministic core
+> (loop runtime, CLI, manifest loading, schema validation, evidence, metrics,
+> thresholds, branching, verification, versioning, memory, artifacts, PR
+> automation, tests). The pre-existing **TypeScript** code under `src/`
+> (Inngest workflows, run/update functions) is **preserved as an adapter /
+> interface layer** — see `artifacts/repo-inspection.md` for the language
+> decision. The legacy TS documentation is retained further down this file.
+
+## Arrange once, hit go
+
+```bash
+# Run a loop once
+python -m skillops run --loop loops/weekly-skill-review.yaml
+
+# Or via the installed console script (after `pip install -e .`)
+skillops run --loop loops/weekly-skill-review.yaml
+
+# Validate every loop manifest against its schema
+python -m skillops validate
+
+# Run the test suite
+python -m pytest
+```
+
+`run` prints a JSON loop report to stdout (logs go to stderr) and ends in a
+**declared terminal state** — never "done" or "looks good":
+`PASS_NO_CHANGE_RECORDED`, `PASS_CANDIDATE_REJECTED_RECORDED`,
+`PASS_CANDIDATE_PR_CREATED`, `FAIL_PATCH_PR_CREATED`, or
+`ESCALATED_WITH_BLOCKER`.
+
+## The loop
+
+```text
+Run → Measure → Compare
+   → if fail: Repair (corrective)
+   → if pass: Maintain, Challenge, Optimize (preventive)
+→ Recommend → Verify → Test → Version → Remember → Repeat
+```
+
+- **How manifests control behavior.** A `LoopSpec` (`loops/*.yaml`) declares the
+  target skill, trigger, runtime limits, required evidence, metrics, thresholds,
+  branches, corrective/preventive/optimization actions, verifier/test/PR
+  behavior, memory file, required artifacts, and terminal states. Skills are
+  described by manifests under `skills/<skill>/` (spec, config, thresholds,
+  evidence, evaluation, improvement-policy, versioned skill files). The runtime
+  loads and schema-validates these before doing anything.
+- **Why Python owns the core.** The repo originated greenfield and is primarily
+  an autonomous loop engine, so the deterministic control system is implemented
+  in Python. TypeScript is used only as an adapter/interface layer.
+- **Pass does not stop improvement.** When thresholds pass, the loop still runs
+  staleness, drift, challenge-benchmark, and optimization scans. It creates a
+  candidate version **only** when there is evidence-backed measurable
+  improvement that preserves every required threshold; otherwise it records a
+  no-change decision and waits for the next trigger.
+- **Fail triggers corrective repair.** Failing thresholds diagnose the failure,
+  recommend a patch (suggestion only), verify it, create a **new** skill version
+  (never overwriting history), run regression, and open a PR.
+- **Metrics decide pass/fail — never the LLM.** `compare_thresholds` is the only
+  authority. LLM-style output may suggest a patch/candidate, and even that is
+  constrained (`constrain_recommendation`) and verified before use.
+- **Verification blocks unsafe updates.** The Verifier rejects missing evidence,
+  unversioned/secret-bearing changes, self-certification, and candidates that
+  fail to preserve thresholds or show no measured improvement.
+- **Versioning and rollback.** Every update is versioned; `create_skill_version`
+  refuses to overwrite without a changelog and `rollback_skill` repoints the
+  active version — updates are always reversible.
+- **Artifacts prove completion.** Completion is mechanical: tests, build/
+  validation logs, metric summaries, reports, the final diff, the commit, the
+  pushed branch, and the PR URL in `artifacts/` — not an agent's say-so.
+
+## Python package layout
+
+```text
+loops/
+  schemas/         loop, skill, evidence, metric, improvement, escalation schemas
+  *.yaml           weekly-skill-review, incident-triage.loop, meta-loop
+skillops/
+  cli.py           arrange-once entrypoint (run / validate / version)
+  orchestrator/    load + validate spec, state machine, branch, escalation, run_loop
+  runs/ evidence/ metrics/ analysis/ recommendations/
+  verification/ versioning/ memory/ pr/ db/ utils/
+skills/incident-triage/   sample skill (manifests + versioned skill files)
+tests/                     pytest suite (runner, metrics, thresholds, branching,
+                           verifier, versioning, memory, update flow)
+artifacts/                 evidence: reports, logs, diff, PR url
+```
+
+---
+
+## Legacy TypeScript adapter (preserved)
+
+The original TypeScript control-loop core is retained as the adapter/interface
+layer. It is not a web app, dashboard, API service, database-backed platform, or
+CLI tool — it is the runtime structure for looped skills with evidence-based
+updates, now driven by the Python core above.
 
 ## What Problem SkillOps Solves
 

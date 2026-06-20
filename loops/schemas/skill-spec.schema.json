@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "skill-spec.schema.json",
+  "title": "SkillSpec",
+  "type": "object",
+  "required": ["skill_id", "name", "active_version", "inputs", "outputs"],
+  "properties": {
+    "skill_id": {"type": "string"},
+    "name": {"type": "string"},
+    "description": {"type": "string"},
+    "active_version": {"type": "string", "pattern": "^v[0-9]+$"},
+    "owner": {"type": "string"},
+    "inputs": {
+      "type": "object",
+      "required": ["fields"],
+      "properties": {
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["name", "type"],
+            "properties": {
+              "name": {"type": "string"},
+              "type": {"type": "string"},
+              "enum": {"type": "array", "items": {"type": "string"}}
+            }
+          }
+        }
+      }
+    },
+    "outputs": {
+      "type": "object",
+      "required": ["label"],
+      "properties": {
+        "label": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

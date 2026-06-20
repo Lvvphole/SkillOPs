@@ -1,0 +1,16 @@
+# ImprovementPolicy for incident-triage (validates against improvement-policy.schema.json).
+# Constrains candidate and patch behavior so updates stay safe and reversible.
+approved_optimization_metrics:
+  - false_positive_rate
+  - avg_duration_ms
+required_preserved_thresholds:
+  - min_success_rate
+  - max_avg_duration_ms
+  - max_false_positive_rate
+  - min_action_rate
+candidate_pr_rule: "PR only if all required thresholds preserved AND >=1 approved optimization metric improves"
+max_version_bump: 1
+allow_corrective_patch: true
+# measured_improvement is empty in v1: no candidate is created without evidence
+# of a measurable gain. An adapter can populate this from an A/B evaluation.
+measured_improvement: {}

@@ -1,0 +1,14 @@
+{
+  "incident-triage": {
+    "baseline_metrics": {
+      "action_rate": 0.5,
+      "false_positive_rate": 0.0,
+      "success_rate": 1.0
+    },
+    "last_branch": "preventive",
+    "last_terminal_state": "PASS_NO_CHANGE_RECORDED",
+    "last_updated_iso": "2026-06-20T04:06:24.994Z",
+    "passed": true,
+    "updated_at": "2026-06-20T04:06:24.995Z"
+  }
+}

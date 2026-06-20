@@ -1,0 +1,32 @@
+# EvidenceSpec for incident-triage (validates against evidence-spec.schema.json).
+# Evidence must exist before analysis. If no run history exists, the loop seeds
+# evidence by running the skill against these sample inputs.
+required_sources:
+  - run_history
+  - incident_outcomes
+min_sample_size: 4
+sample_inputs:
+  - id: inc-001
+    description: Database outage affecting checkout
+    severity: high
+    customer_impact: true
+  - id: inc-002
+    description: Minor UI typo on settings page
+    severity: low
+    customer_impact: false
+  - id: inc-003
+    description: Elevated latency for a subset of customers
+    severity: medium
+    customer_impact: true
+  - id: inc-004
+    description: Internal cron job warning, no customer impact
+    severity: medium
+    customer_impact: false
+  - id: inc-005
+    description: Auth service degraded for all users
+    severity: high
+    customer_impact: true
+  - id: inc-006
+    description: Cosmetic log noise in staging
+    severity: low
+    customer_impact: false

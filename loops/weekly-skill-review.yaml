@@ -1,0 +1,71 @@
+# LoopSpec: weekly skill review.
+# Arrange once, hit go:  python -m skillops run --loop loops/weekly-skill-review.yaml
+loop_id: weekly-skill-review
+target_skill: incident-triage
+trigger:
+  type: schedule
+  cron: "0 9 * * 1"   # Mondays 09:00 UTC
+
+runtime_limits:
+  max_iterations: 50
+  token_cap: 1200
+  max_escalations: 5
+
+required_evidence:
+  - run_history
+  - incident_outcomes
+
+required_metrics:
+  - success_rate
+  - avg_duration_ms
+  - false_positive_rate
+  - action_rate
+
+thresholds:
+  min_success_rate: 0.8
+  max_avg_duration_ms: 1000
+  max_false_positive_rate: 0.2
+  min_action_rate: 0.25
+
+branches:
+  corrective: "thresholds fail -> diagnose, patch, verify, version, PR"
+  preventive: "thresholds pass -> staleness, drift, challenge, optimization scan"
+  optimization: "evidence-backed candidate only -> verify candidate, regress, PR"
+
+corrective_actions:
+  - diagnose_failure
+  - recommend_patch
+  - verify_proposed_changes
+  - create_skill_version
+  - run_regression
+  - create_pull_request
+
+preventive_actions:
+  - run_staleness_check
+  - run_drift_check
+  - run_challenge_benchmarks
+  - run_optimization_scan
+
+optimization_actions:
+  - recommend_candidate
+  - verify_candidate
+  - compare_skill_versions
+  - create_pull_request
+
+verifier_rejection_behavior: revise_once_or_escalate
+test_failure_behavior: escalate_after_two_failures
+pr_created_behavior: record_url_stop_cycle_wait_next_trigger
+memory_file: skillops/memory/skill-memory.json
+
+required_artifacts:
+  - artifacts/run-history.json
+  - artifacts/metric-summary.json
+  - artifacts/weekly-performance-report.md
+  - artifacts/recommendation-report.md
+
+terminal_states:
+  - PASS_NO_CHANGE_RECORDED
+  - PASS_CANDIDATE_REJECTED_RECORDED
+  - PASS_CANDIDATE_PR_CREATED
+  - FAIL_PATCH_PR_CREATED
+  - ESCALATED_WITH_BLOCKER

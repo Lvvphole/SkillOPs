@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "loop-spec.schema.json",
+  "title": "LoopSpec",
+  "description": "Defines an arrange-once SkillOps loop: target, trigger, evidence, metrics, thresholds, branches, and terminal states.",
+  "type": "object",
+  "required": [
+    "loop_id",
+    "target_skill",
+    "trigger",
+    "runtime_limits",
+    "required_evidence",
+    "required_metrics",
+    "thresholds",
+    "branches",
+    "terminal_states"
+  ],
+  "properties": {
+    "loop_id": {"type": "string"},
+    "target_skill": {"type": "string"},
+    "trigger": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {"type": "string", "enum": ["schedule", "event", "manual"]},
+        "cron": {"type": "string"},
+        "event": {"type": "string"}
+      }
+    },
+    "runtime_limits": {
+      "type": "object",
+      "required": ["max_iterations", "token_cap", "max_escalations"],
+      "properties": {
+        "max_iterations": {"type": "integer", "minimum": 1},
+        "token_cap": {"type": "integer", "minimum": 1},
+        "max_escalations": {"type": "integer", "minimum": 0}
+      }
+    },
+    "required_evidence": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "required_metrics": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "thresholds": {
+      "type": "object",
+      "required": [
+        "min_success_rate",
+        "max_avg_duration_ms",
+        "max_false_positive_rate",
+        "min_action_rate"
+      ],
+      "properties": {
+        "min_success_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "max_avg_duration_ms": {"type": "number", "minimum": 0},
+        "max_false_positive_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "min_action_rate": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "branches": {
+      "type": "object",
+      "required": ["corrective", "preventive"],
+      "properties": {
+        "corrective": {"type": "string"},
+        "preventive": {"type": "string"},
+        "optimization": {"type": "string"}
+      }
+    },
+    "corrective_actions": {"type": "array", "items": {"type": "string"}},
+    "preventive_actions": {"type": "array", "items": {"type": "string"}},
+    "optimization_actions": {"type": "array", "items": {"type": "string"}},
+    "verifier_rejection_behavior": {"type": "string"},
+    "test_failure_behavior": {"type": "string"},
+    "pr_created_behavior": {"type": "string"},
+    "memory_file": {"type": "string"},
+    "required_artifacts": {"type": "array", "items": {"type": "string"}},
+    "terminal_states": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+  }
+}

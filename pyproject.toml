@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "skillops"
+version = "1.0.0"
+description = "Python-first, manifest-driven autonomous loop runtime for AI skills."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "SkillOps" }]
+keywords = ["skillops", "agents", "loop", "manifest", "deterministic"]
+# Minimal runtime dependency: YAML manifest parsing only. Schema validation is a
+# dependency-free internal validator (see skillops/orchestrator/validate_loop_spec.py).
+dependencies = [
+  "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+skillops = "skillops.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/Lvvphole/SkillOPs"
+
+[tool.setuptools]
+packages = [
+  "skillops",
+  "skillops.orchestrator",
+  "skillops.runs",
+  "skillops.evidence",
+  "skillops.metrics",
+  "skillops.analysis",
+  "skillops.recommendations",
+  "skillops.verification",
+  "skillops.versioning",
+  "skillops.memory",
+  "skillops.pr",
+  "skillops.db",
+  "skillops.utils",
+]
+
+[tool.setuptools.package-data]
+"skillops.db" = ["*.sql"]
+"skillops.memory" = ["*.json"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-q"
