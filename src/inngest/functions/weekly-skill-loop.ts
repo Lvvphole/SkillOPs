@@ -1,0 +1,2 @@
+import {inngest} from '../client.js';import {getRunHistory} from '../../runs/getRunHistory.js';import {analyzePerformance} from '../../analysis/analyzePerformance.js';import thresholds from '../../skills/incident-triage/thresholds.json' with {type:'json'};
+export const weeklySkillLoop=inngest.createFunction({id:'weekly-skill-loop'},{cron:'0 9 * * 1'},async()=>({skillId:'incident-triage',...analyzePerformance(getRunHistory('incident-triage'),thresholds,true)}));

@@ -1,0 +1,2 @@
+import type {SkillChange} from '../types.js';
+export function verifyProposedChanges(c:SkillChange){const errors:string[]=[];if(!c.toVersion.match(/^v\d+$/))errors.push('toVersion must be versioned');if(c.toVersion===c.fromVersion)errors.push('new version required');if(!c.proposedContent.trim())errors.push('empty proposed content');if(c.proposedContent.includes('API_KEY=')||c.proposedContent.includes('SECRET='))errors.push('possible secret');return {approved:errors.length===0,errors};}

@@ -1,0 +1,1 @@
+export const logger={info:(m:string,meta?:unknown)=>console.log(JSON.stringify({level:'info',message:m,meta})),error:(m:string,meta?:unknown)=>console.error(JSON.stringify({level:'error',message:m,meta}))};

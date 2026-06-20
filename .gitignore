@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.skillops-data/
+artifacts/test-data/
+
+artifacts/runs.json
