@@ -1,0 +1,1 @@
+export function verifyIncidentInput(input:unknown):input is {id:string;description:string;severity:'low'|'medium'|'high';customerImpact:boolean}{const x=input as Record<string,unknown>;return !!x&&typeof x.id==='string'&&typeof x.description==='string'&&['low','medium','high'].includes(String(x.severity))&&typeof x.customerImpact==='boolean';}

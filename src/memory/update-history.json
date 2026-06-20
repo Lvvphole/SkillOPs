@@ -1,0 +1,1 @@
+[{"skillId":"incident-triage","fromVersion":"v1","toVersion":"v2","reason":"Add customer-impact signal","evidence":["artifacts/metric-summary.json"]}]

@@ -1,0 +1,2 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {runSkill} from '../src/runs/runSkill.js';
+test('runs incident triage skill and logs result',async()=>{process.env.SKILLOPS_DATA_DIR='artifacts/test-data';const r=await runSkill('incident-triage',{id:'1',description:'outage',severity:'high',customerImpact:false});assert.equal(r.success,true);assert.equal(r.actionTaken,true);});

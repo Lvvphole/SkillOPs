@@ -1,0 +1,2 @@
+import type {SkillRun,Thresholds} from '../types.js';import {scoreSkillPerformance} from '../metrics/scoreSkillPerformance.js';import {recommendImprovements} from './recommendImprovements.js';
+export function analyzePerformance(runs:SkillRun[],thresholds:Thresholds,explicitReview=false){const summary=scoreSkillPerformance(runs,thresholds);return {summary,recommendations:recommendImprovements(summary,explicitReview)};}

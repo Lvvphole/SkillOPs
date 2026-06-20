@@ -1,0 +1,2 @@
+import thresholds from '../../skills/incident-triage/thresholds.json' with {type:'json'};import {getRunHistory} from '../../runs/getRunHistory.js';import {analyzePerformance} from '../../analysis/analyzePerformance.js';import {inngest} from '../client.js';
+export const reviewSkillPerformance=inngest.createFunction({id:'review-skill-performance'},{event:'skill/review'},async({event}:any)=>analyzePerformance(getRunHistory(event.data.skillId),thresholds));
