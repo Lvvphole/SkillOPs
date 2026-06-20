@@ -2,9 +2,16 @@
 
 SkillOps is a deterministic control-loop reference implementation for operating AI skills. The loop runs a skill, records run evidence, calculates metrics, compares those metrics to fixed thresholds, recommends improvements only when review is requested or thresholds fail, verifies evidence and proposed changes, writes new versioned skill files, and repeats on a weekly cadence.
 
-## Apply UI note
+## Generated patch policy
 
-If the patch UI reports `README.md` as `Skipped`, that means the README hunk could not be applied in that UI context, usually because the target README already differs from the original one-line placeholder or because that hunk was already applied. To avoid blocking the PR-creation flow, the expanded SkillOps operator documentation now lives in this dedicated docs file and the root README is restored to the repository placeholder.
+Root `README.md` is not used as the generated documentation patch target for PR
+repair or evidence-only changes. Expanded operator documentation belongs in this
+dedicated docs file, and README-specific edits require an explicit task that
+names `README.md`.
+
+For PR repair/evidence-only changes, the verifier records a README diff check in
+`artifacts/readme-diff-verification.md`. The branch must not contain a
+`diff --git a/README.md b/README.md` file header in the aggregate PR diff.
 
 ## Install
 
@@ -71,5 +78,8 @@ Before creating or updating a PR, verify:
 1. Required files exist at the documented exact paths.
 2. `npm test` passes and output is saved in `artifacts/test-results.log`.
 3. `npm run build` passes and output is saved in `artifacts/build-results.log`.
-4. `artifacts/final-diff.patch` is regenerated from the current branch diff.
-5. Branch name, commit hash, test command, build command, and PR evidence are documented.
+4. `git diff --name-status origin/main...HEAD -- README.md` produces no output
+   unless the task explicitly names `README.md`.
+5. `artifacts/final-diff.patch` is regenerated from the current branch diff and
+   contains no root README file header for PR repair/evidence-only changes.
+6. Branch name, commit hash, test command, build command, and PR evidence are documented.

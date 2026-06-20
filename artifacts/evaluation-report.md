@@ -30,6 +30,7 @@ mechanical: it cites files, logs, and artifacts, never agent narration.
 | 28 | Build/validation passes; log saved | ✅ | `artifacts/build-results.log` |
 | 29 | Required artifacts generated | ✅ | `artifacts/*` |
 | 30 | Final diff captured | ✅ | `artifacts/final-diff.patch` |
+| 30a | README not targeted by repair/evidence-only diff | ✅ | `artifacts/readme-diff-verification.md` |
 | 31 | Secret scan clean | ✅ | verification-report §Secrets |
 | 32 | Committed with required message | ✅ | `feat: add manifest-driven SkillOps loop runtime` |
 | 33 | Branch pushed | ✅ | see `artifacts/pr-url.txt` |

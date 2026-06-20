@@ -39,10 +39,16 @@ state, and the PR URL — not agent explanations.
 
 ## Git / PR evidence
 - Remote `origin` → `https://github.com/Lvvphole/SkillOPs` ✅
-- Default branch: `main`; feature branch: `claude/zealous-hopper-hrc9n6`.
+- Default branch: `main`; current repair branch: `codex/readme-verification-fix`.
 - Commit hash, push result, final diff, and PR URL: recorded in
   `artifacts/pr-url.txt` and `artifacts/final-diff.patch` (populated at
   push/PR time; referenced from `artifacts/evaluation-report.md`).
+
+## README diff guard
+- PR repair/evidence-only branches must not target root `README.md`.
+- The README check is recorded in `artifacts/readme-diff-verification.md`.
+- `artifacts/final-diff.patch` must not contain the file header
+  `diff --git a/README.md b/README.md` for this branch type.
 
 ## Verifier verdict
 All checkable evidence present and consistent. Remaining items (commit hash,
